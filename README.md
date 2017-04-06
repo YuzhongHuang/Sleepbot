@@ -1,2 +1,2 @@
 # Sleepbot
-### Yuzhong Huang Dhash Shrivathsa
+### Yuzhong Huang, Dhash Shrivathsa
