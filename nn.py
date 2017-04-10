@@ -21,6 +21,9 @@ class Intrinsics:
     default_thresh = attrib()
     thresh = default_thresh
 
+    def reset_thresh(self):
+        self.thresh = self.default_thresh
+
 def sigmoid(x: Float, deriv=False) -> Float:
     if(deriv==True):
         return x*(1-x)
@@ -54,7 +57,7 @@ class RELU_Neuron(Neuron):
         if self.intrinsics.thresh < sum_X:
             old_thresh = self.intrinsics.thresh
             self.intrinsics.reset_thresh()
-            return self.intrinsic.thresh - sum_X
+            return old_thresh - sum_X
         else:
             self.inrinsics.thresh -= sum_X
             return 0
