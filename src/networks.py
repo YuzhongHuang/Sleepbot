@@ -21,8 +21,8 @@ class Network(object):
         dimensions of the network.  The first two dimensions are 
         consistent with the input image. 
 
-        The integer ``density`` refers to the number output 
-        connections that each neuron contains. 
+        The integer ``density`` refers to the number of output 
+        connections that each neuron has. 
 
         The integer ``num`` indicates number of neurons in the 
         network's hidden layer.  Note that there are #(img pixels) 
@@ -50,7 +50,7 @@ class Network(object):
         Randomly populate the neurons' 3D positions in the space 
         given by self.sizes """
 
-        # input layer neurons have z value equal to 0
+        # input layer neurons have z values equal to 0
         for i in self.sizes[0]:
             for j in self.sizes[1]:
                 self.pos.append((i,j,0))
@@ -129,7 +129,7 @@ class Network(object):
                     if outputs:
                         # store signals to individual neurons that connected to the neuron
                         for j in range(len(self.neurons[i].outs)):
-                            self.signals[self.neurons[i].outs(j)] = outputs[j]
+                            self.signals[self.neurons[i].outs(j)] += outputs[j]
                 else:
                     # append to output if the neuron is at top of the network
                     self.output.append(outputs)
