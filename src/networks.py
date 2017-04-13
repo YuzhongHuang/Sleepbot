@@ -30,6 +30,7 @@ class Network(object):
 
         self.sizes = sizes
         self.density = density
+        self.num = num
         self.output = []
 
         #(input layer + hidden layer) of neurons
@@ -37,7 +38,7 @@ class Network(object):
 
         # initialize signals that store all the intermediate inputs 
         # to individual neurons, including input neurons
-        self.signals = np.zeros(len(neurons))
+        self.signals = np.zeros(len(self.neurons))
 
         # initialize neuron's positions and form connections
         self.pos = []
@@ -51,18 +52,18 @@ class Network(object):
         given by self.sizes """
 
         # input layer neurons have z values equal to 0
-        for i in self.sizes[0]:
-            for j in self.sizes[1]:
+        for i in range(self.sizes[0]):
+            for j in range(self.sizes[1]):
                 self.pos.append((i,j,0))
 
         # randomly generate hidden layer neurons
-        xs = np.random.uniform(low=0, high=sizes[0], size=(self.num,))
-        ys = np.random.uniform(low=0, high=sizes[1], size=(self.num,))
-        zs = np.random.uniform(low=0, high=sizes[2], size=(self.num,))
+        xs = np.random.uniform(low=0, high=self.sizes[0], size=(self.num,))
+        ys = np.random.uniform(low=0, high=self.sizes[1], size=(self.num,))
+        zs = np.random.uniform(low=0, high=self.sizes[2], size=(self.num,))
         pos = [(x,y,z) for x, y, z in zip(xs, ys, zs)]
 
         # sort the list based on z value
-        sort(pos, key=lambda: x:x[2]) 
+        pos.sort(key=lambda x:x[2]) 
         self.pos += pos
 
     def form_connection(self):
@@ -73,7 +74,8 @@ class Network(object):
 
         # loop through all the neurons spatially to form connections
         for i in range(len(self.pos)):
-            self.neurons[i].connect(find_connection(self.pos(i), i))
+            print i
+            self.neurons[i].connect(self.find_connection(self.pos[i], i))
 
     def find_connection(self, pos, i):
         """
@@ -92,13 +94,13 @@ class Network(object):
 
         # distance is equavalent to magnitude of difference vector
         for p in self.pos[start:]:
-            candidates.append(numpy.subtract(p, pos))
+            candidates.append(np.subtract(p, pos))
 
         # get a list of indices sorted on distance from the given position
-        indices = [i[0] for i in sorted(enumerate(candidates), key=lambda: x:(x[1]**2).sum())]
+        indices = [index for index, value in sorted(enumerate(candidates), key=lambda x:(x[1]**2).sum())]
 
         # return indices of the first #(self.density) neurons
-        return indices[:self.density] + i
+        return [index + start for index in indices[1:self.density+1]]
 
     def feedforward(self, imgs):
         """
@@ -107,15 +109,11 @@ class Network(object):
         video length """
         
         vid_length = len(imgs)
-        current = 0
+        self.set_input(imgs[0])
+        current = 1
 
         # feedforward while intermediate signals are not zeros       
         while self.signals.sum():
-            # store input signals if available
-            if current <= vid_length:
-                self.set_input(imgs[current])
-                current += 1
-
             # get the non zeros indices
             non_zeros = [i for i, e in enumerate(self.signals) if e!=0]
 
@@ -123,42 +121,54 @@ class Network(object):
             for i in non_zeros:
                 # get outputs from a single neuron
                 outputs = self.neurons[i].receive(self.signals[i])
+                # clear received signal
+                self.signals[i] = 0
 
-                if self.neurons[i].outs: # check if the neuron is at top of the network
+                if len(self.neurons[i].outs)!=0: # check if the neuron is at top of the network
                     # store the outputs to signals if the neuron fires
-                    if outputs:
+                    if type(outputs)!=int:
                         # store signals to individual neurons that connected to the neuron
                         for j in range(len(self.neurons[i].outs)):
-                            self.signals[self.neurons[i].outs(j)] += outputs[j]
+                            self.signals[self.neurons[i].outs[j]] += outputs[j]
                 else:
                     # append to output if the neuron is at top of the network
                     self.output.append(outputs)
 
+            # store input signals if available
+            if current < vid_length:
+                self.set_input(imgs[current])
+                current += 1
+
+            print current
+
     def set_input(self, img):
         """store a single img to input signals"""
-        for i in self.sizes[0]:
-            for j in self.sizes[1]:
+        for i in range(self.sizes[0]):
+            for j in range(self.sizes[1]):
                 self.signals[i*self.sizes[0]+j] = img[i][j]
 
 
 class Neuron(object):
     def __init__(self):
         self.nucleus = 0
-        self.threshold = 1
+        self.threshold = .2
 
     def connect(self, outs):
         self.outs = outs
-        self.w = np.random.randn(len(outs))
+        if len(outs)!=0:
+            self.w = abs(np.random.randn(len(outs)))
+        else:
+            self.w = 1
 
     def receive(self, signal):
         # reset previous over-threshold nucleus
-        if self.nucleus > self.threshold:
+        if self.nucleus >= self.threshold:
             self.nucleus = 0
 
         # fire if nucleus is above threshold
         self.nucleus += signal
-        if self.nucleus > self.threshold:
-            self.fire()
+        if self.nucleus >= self.threshold:
+            return self.fire()
         else:
             return 0
 
@@ -168,3 +178,9 @@ class Neuron(object):
     def fire(self):
         self.normalize()
         return self.w * self.nucleus
+
+# if __name__ == '__main__':
+# import numpy
+# import networks
+# net = networks.Network([10,10,10], 30, 100)
+# net.feedforward(abs(numpy.random.randn(40, 10, 10)))
