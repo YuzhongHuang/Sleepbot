@@ -74,7 +74,6 @@ class Network(object):
 
         # loop through all the neurons spatially to form connections
         for i in range(len(self.pos)):
-            print i
             self.neurons[i].connect(self.find_connection(self.pos[i], i))
 
     def find_connection(self, pos, i):
@@ -138,9 +137,7 @@ class Network(object):
             if current < vid_length:
                 self.set_input(imgs[current])
                 current += 1
-
-            print current
-
+                
     def set_input(self, img):
         """store a single img to input signals"""
         for i in range(self.sizes[0]):
