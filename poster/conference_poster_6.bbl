@@ -1,0 +1,48 @@
+\begin{thebibliography}{1}
+
+\bibitem{harvey2003skipnet}
+Nicholas~JA Harvey, Michael~B Jones, Stefan Saroiu, Marvin Theimer, and Alec
+  Wolman.
+\newblock Skipnet: A scalable overlay network with practical locality
+  properties.
+\newblock {\em networks}, 34(38), 2003.
+
+\bibitem{hobson2002cognitive}
+J~Allan Hobson and Edward~F Pace-Schott.
+\newblock The cognitive neuroscience of sleep: neuronal systems, consciousness
+  and learning.
+\newblock {\em Nature Reviews Neuroscience}, 3(9):679--693, 2002.
+
+\bibitem{krizhevsky2012imagenet}
+Alex Krizhevsky, Ilya Sutskever, and Geoffrey~E Hinton.
+\newblock Imagenet classification with deep convolutional neural networks.
+\newblock In {\em Advances in neural information processing systems}, pages
+  1097--1105, 2012.
+
+\bibitem{ross1984tonic}
+CHRISTOPHER~A Ross, DAVID~A Ruggiero, DONG~H Park, TONG~H Joh, ALAN~F Sved,
+  JULIO Fernandez-Pardal, JUAN~M Saavedra, and DONALD~J Reis.
+\newblock Tonic vasomotor control by the rostral ventrolateral medulla: effect
+  of electrical or chemical stimulation of the area containing c1 adrenaline
+  neurons on arterial pressure, heart rate, and plasma catecholamines and
+  vasopressin.
+\newblock {\em Journal of Neuroscience}, 4(2):474--494, 1984.
+
+\bibitem{schenck2002rem}
+Carlos~H Schenck and Mark~W Mahowald.
+\newblock Rem sleep behavior disorder: clinical, developmental, and
+  neuroscience perspectives 16 years after its formal identification in sleep.
+\newblock {\em Sleep}, 25(2):120, 2002.
+
+\bibitem{tang2016recurrent}
+Zhiyuan Tang, Dong Wang, and Zhiyong Zhang.
+\newblock Recurrent neural network training with dark knowledge transfer.
+\newblock In {\em Acoustics, Speech and Signal Processing (ICASSP), 2016 IEEE
+  International Conference on}, pages 5900--5904. IEEE, 2016.
+
+\bibitem{zoph2016neural}
+Barret Zoph and Quoc~V Le.
+\newblock Neural architecture search with reinforcement learning.
+\newblock {\em arXiv preprint arXiv:1611.01578}, 2016.
+
+\end{thebibliography}

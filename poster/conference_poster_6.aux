@@ -1,0 +1,36 @@
+\relax 
+\citation{hobson2002cognitive}
+\citation{krizhevsky2012imagenet}
+\citation{harvey2003skipnet}
+\citation{zoph2016neural}
+\citation{tang2016recurrent}
+\citation{schenck2002rem}
+\citation{ross1984tonic}
+\bibstyle{plain}
+\bibdata{cites}
+\bibcite{harvey2003skipnet}{1}
+\bibcite{hobson2002cognitive}{2}
+\bibcite{krizhevsky2012imagenet}{3}
+\bibcite{ross1984tonic}{4}
+\bibcite{schenck2002rem}{5}
+\bibcite{tang2016recurrent}{6}
+\bibcite{zoph2016neural}{7}
+\providecommand\tcolorbox@label[2]{}
+\@writefile{toc}{\contentsline {paragraph}{Background}{1}}
+\@writefile{toc}{\contentsline {paragraph}{The training process}{1}}
+\@writefile{toc}{\contentsline {paragraph}{Backpropogation}{1}}
+\@writefile{toc}{\contentsline {paragraph}{Proposed solution}{1}}
+\@writefile{toc}{\contentsline {paragraph}{Visualization of the training process}{1}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Graphical intuiton and arrangement in a traditional convolutional neural network (CNN). In this, A represents a convolution, B an aggregation/downsampling layer such as a softmax, and F is a fully connected neuron. The right figure is a net trained on MNIST's first layer activation, on an image of all max values. We can see low-level features arising (groups/lines of pixels).\relax }}{1}}
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{fig:cnn}{{1}{1}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces A depiction of neuron weights in time, as training progresses. We see a strong tend towards limit trend in the norms of the neurons as training progresses.\relax }}{1}}
+\newlabel{fig:neuronconvergence}{{2}{1}}
+\@writefile{toc}{\contentsline {paragraph}{Trends in neuron weights}{1}}
+\@writefile{toc}{\contentsline {paragraph}{Baseline performance and success measures}{1}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces  Accuracy on the test dataset for number of batches trained. Comparing random noise in the system (uniform in the $-1 \leq x \leq 1$) to the system with no interruptions in backpropogation\relax }}{1}}
+\newlabel{fig:noisevsnormal}{{3}{1}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Most of our heuristics looked like this (delta)\relax }}{1}}
+\newlabel{fig:result}{{4}{1}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Some of our heuristics (here \texttt  {delta = last\_wts - current\_wts; new\_wts = current\_wts + delta**2}) show promise, improving the training rate by 'boosting' the initial process with a square, that rounds lower as the training cycle goes on.\relax }}{1}}
+\newlabel{fig:promising}{{5}{1}}
